@@ -9,7 +9,7 @@ config: CascadaWebsiteConfig = get_config()
 
 
 # create a sanic application instance
-server: Sanic = Sanic(config.name)
+server: Sanic = Sanic(config.name.replace(" ", "-").capitalize())
 
 # loading the layout component
 
@@ -26,7 +26,7 @@ hme_page: Component = getobjfrmfile(str(config.homepage), "Homepage")
 def register_page(name: str, component: Component):
     "register a toplevel page route"
 
-    @server.get(f"/{route}", name=name)
+    @server.get(f"/{name}", name=name)
     async def wrapper(request):
         return html(layout(component()))
 
@@ -35,7 +35,7 @@ for parent, dirs, files in config.pages.walk():
     for file in files:
         if file.endswith(".py"):
             _f = parent / file
-            register_page(_f.name, getobjfrmfile(str(_f), "Page"))
+            register_page(_f.name.removesuffix(".py"), getobjfrmfile(str(_f), "Page"))
 
 
 # setting up the custom error pages
