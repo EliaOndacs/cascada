@@ -1,0 +1,12 @@
+{
+  "name": "test",
+  "public": {
+    "css": "./website/css",
+    "public": "./website/public",
+    "js": "./website/js"
+  },
+  "error_page": "./website/error.py",
+  "homepage": "./website/home.py",
+  "layout": "./website/layout.py",
+  "pages": "./website/pages"
+}

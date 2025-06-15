@@ -1,5 +1,10 @@
 {
-    "repositories": [],
+    "repositories": [
+        {
+            "url": "https://github.com/EliaOndacs/corelib",
+            "dir": "corelib"
+        }
+    ],
     "name": "cascada",
     "description": "YOUR PROJECT DESCRIPTION",
     "version": "0.1.0"

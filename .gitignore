@@ -1,0 +1,4 @@
+releases/
+corelib/
+.vscode
+__pycache__
