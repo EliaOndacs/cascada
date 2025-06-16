@@ -48,7 +48,7 @@ for parent, dirs, files in config.pages.walk():
 def register_subroute(parent: str, name: str, component: Component):
     "register a subroute for a page"
 
-    @server.get(f"/{parent}/name", name=name)
+    @server.get(f"/{parent}/{name}", name=name)
     async def wrapper(request):
         return html(layout(component()))
 
@@ -58,7 +58,7 @@ for parent, dirs, _ in config.subroutes.walk():
         for parent2, _, files in (parent / _dir).walk():
             for file in files:
                 if file.endswith(".py"):
-                    _f = parent / file
+                    _f = parent2 / file
                     register_subroute(
                         _dir,
                         _f.name.removesuffix(".py"),
