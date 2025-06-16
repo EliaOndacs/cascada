@@ -10,5 +10,6 @@
   "layout": "./website/layout.py",
   "pages": "./website/pages",
   "database": "./website/database",
-  "dbschema": "./website/schema.py"
+  "dbschema": "./website/schema.py",
+  "blog": "./website/blog"
 }

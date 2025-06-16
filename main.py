@@ -1,4 +1,4 @@
-from sanic import Sanic, html
+from sanic import Blueprint, Sanic, html
 
 
 from corelib.phelix import Component
@@ -11,6 +11,7 @@ config: CascadaWebsiteConfig = get_config()
 
 # create a sanic application instance
 server: Sanic = Sanic(config.name.replace(" ", "-").capitalize())
+blog = Blueprint("blog", "/blog")
 
 # loading the layout component
 
@@ -37,6 +38,35 @@ for parent, dirs, files in config.pages.walk():
         if file.endswith(".py"):
             _f = parent / file
             register_page(_f.name.removesuffix(".py"), getobjfrmfile(str(_f), "Page"))
+
+
+# loading and rendering the blog pages
+
+
+def register_blog_page(name: str, content: str):
+    "register a blog page"
+
+    @blog.get(f"/{name}", name=name)
+    async def wrapper(request):
+        return html(layout(content))
+
+
+def render_markdown(markdown: str):
+    "render markdown to html"
+    from markdown_it import MarkdownIt
+
+    return MarkdownIt().render(markdown)
+
+
+for parent, dirs, files in config.blog.walk():
+    for file in files:
+        if file.endswith(".md"):
+            _f = parent / file
+            register_blog_page(
+                _f.name.removesuffix(".md"), render_markdown(_f.read_text())
+            )
+
+server.blueprint(blog)
 
 
 # setting up the custom error pages

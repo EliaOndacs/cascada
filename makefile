@@ -9,4 +9,3 @@ run-dev: install-deps
 
 run-prod: install-deps
 	uvicorn main:server --host 0.0.0.0 --port 80 --workers $(WEB_CONCURRENCY)
-

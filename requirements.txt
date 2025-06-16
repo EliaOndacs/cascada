@@ -1,2 +1,3 @@
 -r corelib/requirements.txt
 pydantic
+markdown_it
