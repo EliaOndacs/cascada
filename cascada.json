@@ -11,5 +11,6 @@
   "pages": "./website/pages",
   "database": "./website/database",
   "dbschema": "./website/schema.py",
-  "blog": "./website/blog"
+  "blog": "./website/blog",
+  "subroutes": "./website/routes"
 }

@@ -5,6 +5,9 @@ from corelib.phelix import Component
 from src.config import CascadaWebsiteConfig, get_config
 from src.util import getobjfrmfile
 
+# make sure default database is created
+import db
+
 # load the configuration
 config: CascadaWebsiteConfig = get_config()
 
@@ -39,6 +42,28 @@ for parent, dirs, files in config.pages.walk():
             _f = parent / file
             register_page(_f.name.removesuffix(".py"), getobjfrmfile(str(_f), "Page"))
 
+# register all the subroutes and their pages
+
+
+def register_subroute(parent: str, name: str, component: Component):
+    "register a subroute for a page"
+
+    @server.get(f"/{parent}/name", name=name)
+    async def wrapper(request):
+        return html(layout(component()))
+
+
+for parent, dirs, _ in config.subroutes.walk():
+    for _dir in dirs:
+        for parent2, _, files in (parent / _dir).walk():
+            for file in files:
+                if file.endswith(".py"):
+                    _f = parent / file
+                    register_subroute(
+                        _dir,
+                        _f.name.removesuffix(".py"),
+                        getobjfrmfile(str(_f), "Page"),
+                    )
 
 # loading and rendering the blog pages
 

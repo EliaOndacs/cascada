@@ -3,6 +3,7 @@ import os
 
 
 def getobjfrmfile(file_path, function_name):
+    "get an object from a python file"
     if not os.path.isfile(file_path):
         raise FileNotFoundError(f"The file {file_path} does not exist.")
     spec = importlib.util.spec_from_file_location("module.name", file_path)

@@ -2,3 +2,4 @@ releases/
 corelib/
 .vscode
 __pycache__
+website/database/content.db
