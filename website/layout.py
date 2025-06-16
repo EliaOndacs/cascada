@@ -1,6 +1,6 @@
 from corelib.htmlgen import *
 from corelib.phelix import leafComponent
-from config import CascadaWebsiteConfig, get_config
+from src.config import CascadaWebsiteConfig, get_config
 
 config: CascadaWebsiteConfig = get_config()
 

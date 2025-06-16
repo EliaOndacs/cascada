@@ -1,8 +1,9 @@
 from sanic import Sanic, html
 
-from config import CascadaWebsiteConfig, get_config
+
 from corelib.phelix import Component
-from util import getobjfrmfile
+from src.config import CascadaWebsiteConfig, get_config
+from src.util import getobjfrmfile
 
 # load the configuration
 config: CascadaWebsiteConfig = get_config()

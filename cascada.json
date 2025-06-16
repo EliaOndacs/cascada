@@ -8,5 +8,7 @@
   "error_page": "./website/error.py",
   "homepage": "./website/home.py",
   "layout": "./website/layout.py",
-  "pages": "./website/pages"
+  "pages": "./website/pages",
+  "database": "./website/database",
+  "dbschema": "./website/schema.py"
 }
