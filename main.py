@@ -4,6 +4,7 @@ from sanic import Blueprint, Sanic, html
 from corelib.phelix import Component
 from src.config import CascadaWebsiteConfig, get_config
 from src.util import getobjfrmfile
+from blogf import get_blog_posts, render_markdown
 
 # make sure default database is created
 import db
@@ -25,7 +26,7 @@ layout: Component = getobjfrmfile(str(config.layout), "Layout")
 err_page: Component = getobjfrmfile(str(config.error_page), "Page")
 hme_page: Component = getobjfrmfile(str(config.homepage), "Homepage")
 
-# registering all the pages and their routes
+# all the register functions
 
 
 def register_page(name: str, component: Component):
@@ -36,13 +37,19 @@ def register_page(name: str, component: Component):
         return html(layout(component()))
 
 
-for parent, dirs, files in config.pages.walk():
-    for file in files:
-        if file.endswith(".py"):
-            _f = parent / file
-            register_page(_f.name.removesuffix(".py"), getobjfrmfile(str(_f), "Page"))
+def register_page_from_view(
+    name: str, view: str, *, blueprint: Blueprint | None = None
+):
+    "register a toplevel page route using a direct view"
 
-# register all the subroutes and their pages
+    if blueprint:
+        decorator = blueprint.get(f"/{name}", name=name)
+    else:
+        decorator = server.get(f"/{name}", name=name)
+
+    @decorator
+    async def wrapper(request):
+        return html(layout(view))
 
 
 def register_subroute(parent: str, name: str, component: Component):
@@ -51,6 +58,32 @@ def register_subroute(parent: str, name: str, component: Component):
     @server.get(f"/{parent}/{name}", name=name)
     async def wrapper(request):
         return html(layout(component()))
+
+
+def register_subroute_from_view(parent: str, name: str, view: str):
+    "register a subroute for a page using a direct view"
+
+    @server.get(f"/{parent}/{name}", name=name)
+    async def wrapper(request):
+        return html(layout(view))
+
+
+# registering all the pages and their routes
+
+
+for parent, dirs, files in config.pages.walk():
+    for file in files:
+        if file.endswith(".py"):
+            _f = parent / file
+            register_page(_f.name.removesuffix(".py"), getobjfrmfile(str(_f), "Page"))
+        if file.endswith(".md"):
+            _f = parent / file
+            register_page_from_view(
+                _f.name.removesuffix(".md"), render_markdown(_f.read_text())
+            )
+
+
+# register all the subroutes and their pages
 
 
 for parent, dirs, _ in config.subroutes.walk():
@@ -64,32 +97,19 @@ for parent, dirs, _ in config.subroutes.walk():
                         _f.name.removesuffix(".py"),
                         getobjfrmfile(str(_f), "Page"),
                     )
+                if file.endswith(".md"):
+                    _f = parent / file
+                    register_subroute_from_view(
+                        _dir,
+                        _f.name.removesuffix(".md"),
+                        render_markdown(_f.read_text()),
+                    )
 
 # loading and rendering the blog pages
 
 
-def register_blog_page(name: str, content: str):
-    "register a blog page"
-
-    @blog.get(f"/{name}", name=name)
-    async def wrapper(request):
-        return html(layout(content))
-
-
-def render_markdown(markdown: str):
-    "render markdown to html"
-    from markdown_it import MarkdownIt
-
-    return MarkdownIt().render(markdown)
-
-
-for parent, dirs, files in config.blog.walk():
-    for file in files:
-        if file.endswith(".md"):
-            _f = parent / file
-            register_blog_page(
-                _f.name.removesuffix(".md"), render_markdown(_f.read_text())
-            )
+for post in get_blog_posts():
+    register_page_from_view(post[0], render_markdown(post[1]), blueprint=blog)
 
 server.blueprint(blog)
 
