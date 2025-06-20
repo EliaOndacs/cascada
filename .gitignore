@@ -1,6 +1,8 @@
 releases/
 corelib/
 .vscode
-__pycache__
+**/__pycache__
 website/database/content.db
 icon
+.vscode/
+.mypy_cache/
