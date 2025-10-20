@@ -11,6 +11,7 @@ def Layout(*children):
         head(
             meta(charset="UTF-8"),
             meta(name="viewport", content="width=device-width, initial-scale=1.0"),
+            meta(name="Generator", content="Cascada"),
             link("/public/favicon.png", rel="icon"),
             link("/css/global.css", rel="stylesheet"),
             title(config.name),

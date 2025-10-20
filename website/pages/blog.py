@@ -9,5 +9,12 @@ def Page():
     if len(blogs) == 0:
         return mainelement(span("No Blog Post Found"))
     return mainelement(
-        *(div(h1(blog[0]), div(render_markdown(blog[1])), br()) for blog in blogs)
+        *(
+            div(
+                h1(blog[0]),
+                div(render_markdown(blog[1])) if blogs[2] == False else blog[1],
+                br(),
+            )
+            for blog in blogs
+        )
     )

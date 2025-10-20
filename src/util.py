@@ -11,7 +11,7 @@ def getobjfrmfile(file_path, function_name):
         raise Exception(f"error loading module specs: {file_path!r}")
     module = importlib.util.module_from_spec(spec)
     if not spec.loader:
-        raise Exception(f"error loading module spec.lader: {file_path!r}")
+        raise Exception(f"error loading module spec.loader: {file_path!r}")
     spec.loader.exec_module(module)
     if hasattr(module, function_name):
         return getattr(module, function_name)
