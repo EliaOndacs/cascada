@@ -1,1 +1,7 @@
 /* all your global styling can be set here and automatically loaded in your pages */
+a {
+  color: #007bff;
+}
+a:hover {
+  text-decoration: underline;
+}

@@ -18,7 +18,15 @@ def get_blog_posts():
         for file in files:
             if file.endswith(".md"):
                 _f = parent / file
-                yield (_f.name.removesuffix(".md"), _f.read_text(), False)
+                yield (
+                    _f.name.removesuffix(".md"),
+                    _f.read_text(encoding="utf-8"),
+                    False,
+                )
             if file.endswith(".html"):
                 _f = parent / file
-                yield (_f.name.removesuffix(".html"), _f.read_text(), True)
+                yield (
+                    _f.name.removesuffix(".html"),
+                    _f.read_text(encoding="utf-8"),
+                    True,
+                )

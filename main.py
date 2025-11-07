@@ -77,12 +77,14 @@ for parent, dirs, files in config.pages.walk():
         if file.endswith(".md"):
             _f = parent / file
             register_page_from_view(
-                _f.name.removesuffix(".md"), render_markdown(_f.read_text())
+                _f.name.removesuffix(".md"),
+                render_markdown(_f.read_text(encoding="utf-8")),
             )
         if file.endswith(".html"):
             _f = parent / file
             register_page_from_view(
-                _f.name.removesuffix(".html"), render_markdown(_f.read_text())
+                _f.name.removesuffix(".html"),
+                render_markdown(_f.read_text(encoding="utf-8")),
             )
 
 
@@ -105,14 +107,14 @@ for parent, dirs, _ in config.subroutes.walk():
                     register_subroute_from_view(
                         _dir,
                         _f.name.removesuffix(".md"),
-                        render_markdown(_f.read_text()),
+                        render_markdown(_f.read_text(encoding="utf-8")),
                     )
                 if file.endswith(".html"):
                     _f = parent / file
                     register_subroute_from_view(
                         _dir,
                         _f.name.removesuffix(".html"),
-                        _f.read_text(),
+                        _f.read_text(encoding="utf-8"),
                     )
 
 # loading and rendering the blog pages
