@@ -7,9 +7,9 @@
 
 <p align="center">
   <!-- Badges -->
-  ![GitHub commit activity](https://img.shields.io/github/commit-activity/y/EliaOndacs/cascada)
-  ![GitHub Release](https://img.shields.io/github/v/release/EliaOndacs/cascada)
-  ![GitHub License](https://img.shields.io/github/license/EliaOndacs/cascada)
+  <img src=https://img.shields.io/github/commit-activity/y/EliaOndacs/cascada>
+  <img src=https://img.shields.io/github/v/release/EliaOndacs/cascada>
+  <img src=https://img.shields.io/github/license/EliaOndacs/cascada>
 </p>
 
 ---
