@@ -1,9 +1,7 @@
 releases/
-corelib/
 .vscode
 **/__pycache__
 website/database/*
 icon
 .vscode/
 .mypy_cache/
-git-package.json
