@@ -34,7 +34,7 @@
 > - python
 > - make
 
-- :one: Step 1: go to the [release](/releases/latest) page and download
+- :one: Step 1: go to the [release](https://github.com/EliaOndacs/cascada/releases/latest) page and download
   the latest version. (zip/tar.gz)
 
 - :two: Step 2: extract the downloaded file, in it you'll see a directory called "version-x.x.x".
