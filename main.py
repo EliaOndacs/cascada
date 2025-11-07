@@ -6,8 +6,6 @@ from src.config import CascadaWebsiteConfig, get_config
 from src.util import getobjfrmfile
 from blogf import get_blog_posts, render_markdown
 
-# make sure default database is created
-import db
 
 # load the configuration
 config: CascadaWebsiteConfig = get_config()

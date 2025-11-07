@@ -1,5 +1,4 @@
 from json import load as load_json
-from pathlib import Path
 import pydantic
 
 
@@ -10,8 +9,6 @@ class CascadaWebsiteConfig(pydantic.BaseModel):
     homepage: pydantic.FilePath
     layout: pydantic.FilePath
     pages: pydantic.DirectoryPath
-    dbschema: pydantic.FilePath
-    database: pydantic.DirectoryPath
     blog: pydantic.DirectoryPath
     subroutes: pydantic.DirectoryPath
 

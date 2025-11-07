@@ -9,8 +9,6 @@
   "homepage": "./website/home.py",
   "layout": "./website/layout.py",
   "pages": "./website/pages",
-  "database": "./website/database",
-  "dbschema": "./website/schema.py",
   "blog": "./website/blog",
   "subroutes": "./website/routes"
 }
