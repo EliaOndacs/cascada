@@ -6,3 +6,4 @@ website/database/*
 icon
 .vscode/
 .mypy_cache/
+git-packages.json
