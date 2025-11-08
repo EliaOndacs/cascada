@@ -14,7 +14,6 @@ def Layout(*children):
             meta(name="Generator", content="Cascada"),
             meta(name="theme-color", content="#0a0a0a"),
             link("/public/favicon.png", rel="icon"),
-            # script("", src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"),
             link("/css/global.output.css", rel="stylesheet"),
             link(
                 "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap",
