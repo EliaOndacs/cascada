@@ -1,3 +1,5 @@
+from pathlib import Path
+import subprocess
 from sanic import Blueprint, Sanic, html
 
 
@@ -116,6 +118,27 @@ for parent, dirs, _ in config.subroutes.walk():
                         _f.name.removesuffix(".html"),
                         _f.read_text(encoding="utf-8"),
                     )
+
+
+# compiling all the css using tailwind
+
+css_path = config.public.get("css", None)
+
+if css_path:
+    for parent, dirs, files in css_path.walk():
+        for file in files:
+            if file.endswith(".output.css") or not file.endswith(".css"):
+                if file.endswith(".output.css"):
+                    (parent / file).unlink(True)
+                continue
+
+            inp, out = parent / file, parent / (
+                file.removesuffix(".css") + ".output.css"
+            )
+
+            command = f"tailwindcss -m -i {str(inp).replace("\\", "/")} -o {str(out).replace("\\", "/")}"
+            subprocess.run(command, shell=True).check_returncode()
+
 
 # loading and rendering the blog pages
 

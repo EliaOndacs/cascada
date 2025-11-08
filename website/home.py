@@ -16,7 +16,7 @@ def Homepage():
         ),
         h1(
             "Welcome to My Website",
-            classname="bg-gradient-to-r from-red-500 to-blue-500 text-transparent bg-clip-text transform origin-left transition-all hover:cursor-default hover:translate-x-2 text-shadow shadow-lg text-3xl",
+            classname="bg-linear-to-r from-red-500 to-blue-500 text-transparent bg-clip-text transform origin-left transition-all hover:cursor-default hover:translate-x-2 text-shadow shadow-lg text-3xl",
         ),
         p(
             f"""This website is built with Cascada, a modern Python web framework that \
@@ -28,6 +28,6 @@ def Homepage():
                     "https://github.com/EliaOndacs/cascada",
                     classname="text-blue-500 hover:text-blue-400 underline transition-colors",
                 )}.""",
-            classname="text-gray-200 text-sm p-4 bg-gradient-to-r from-blue-900/30 to-red-900/30 rounded-lg shadow-md hover:outline hover:outline-blue-500",
+            classname="text-gray-200 text-sm p-4 bg-linear-to-r from-blue-900/30 to-red-900/30 rounded-lg shadow-md hover:outline hover:outline-blue-500",
         ),
     )

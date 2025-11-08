@@ -31,8 +31,9 @@
 > Prerequisites
 > to run and develop your cascada website you'll need:
 >
-> - python
-> - make
+> - python >=3.14
+> - make >= 4.4.1
+> - tailwindcss (as direct name executable within your path)
 
 - :one: Step 1: go to the [release](https://github.com/EliaOndacs/cascada/releases/latest) page and download
   the latest version. (zip/tar.gz)
