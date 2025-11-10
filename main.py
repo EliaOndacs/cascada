@@ -1,4 +1,5 @@
 import subprocess
+import time
 from sanic import Blueprint, Sanic, html
 
 
@@ -123,12 +124,16 @@ for parent, dirs, _ in config.subroutes.walk():
 
 css_path = config.public.get("css", None)
 
+
 if css_path:
     for parent, dirs, files in css_path.walk():
         for file in files:
+            if file.endswith(".output.css"):
+                (parent / file).unlink(True)
+
+    for parent, dirs, files in css_path.walk():
+        for file in files:
             if file.endswith(".output.css") or not file.endswith(".css"):
-                if file.endswith(".output.css"):
-                    (parent / file).unlink(True)
                 continue
 
             inp, out = parent / file, parent / (
@@ -136,8 +141,12 @@ if css_path:
             )
 
             command = f"tailwindcss -m -i {str(inp).replace("\\", "/")} -o {str(out).replace("\\", "/")}"
-            subprocess.run(command, shell=True).check_returncode()
+            result = subprocess.run(command, shell=True)
+            result.check_returncode()
+            time.sleep(0.1)
 
+            if not out.exists():
+                raise RuntimeError(f"Tailwind did not produce {str(out)!r}")
 
 # loading and rendering the blog pages
 
