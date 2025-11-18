@@ -10,5 +10,6 @@
   "layout": "./website/layout.py",
   "pages": "./website/pages",
   "blog": "./website/blog",
-  "subroutes": "./website/routes"
+  "subroutes": "./website/routes",
+  "components": "./website/components"
 }

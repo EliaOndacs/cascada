@@ -1,4 +1,5 @@
 import subprocess
+import sys
 import time
 from sanic import Blueprint, Sanic, html
 
@@ -16,6 +17,10 @@ config: CascadaWebsiteConfig = get_config()
 # create a sanic application instance
 server: Sanic = Sanic(config.name.replace(" ", "-").capitalize())
 blog = Blueprint("blog", "/blog")
+
+# loading the components directory to path
+
+sys.path.append(str(config.components))
 
 # loading the layout component
 

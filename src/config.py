@@ -11,6 +11,7 @@ class CascadaWebsiteConfig(pydantic.BaseModel):
     pages: pydantic.DirectoryPath
     blog: pydantic.DirectoryPath
     subroutes: pydantic.DirectoryPath
+    components: pydantic.DirectoryPath
 
 
 def get_config() -> CascadaWebsiteConfig:
